@@ -23,6 +23,114 @@ class TriangleTest {
         assertEquals(Triangle.TYPE.SCALENE, triangle.getCurrent_type());
     }
     @Test
+    @DisplayName("almostTooBigSide")
+    void testAlmostTooBigSideIsTriangle() {
+        String userInput = "5999, 2999, 2999";
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertNull(triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("123IsScalene")
+    void testIsScalene() {
+        String userInput = "2,4,3";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals(Triangle.TYPE.SCALENE, triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("464IsIsosceles")
+    void testIsIsosceles() {
+        String userInput = "4,6,4";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals(Triangle.TYPE.ISOSCELES, triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("233IsIsosceles")
+    void testIsIsosceles2() {
+        String userInput = "2,3,3";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals(Triangle.TYPE.ISOSCELES, triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("778IsIsosceles")
+    void testIsIsosceles3() {
+        String userInput = "7,7,8";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals(Triangle.TYPE.ISOSCELES, triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("444IsEquilateral")
+    void testIsEquilateral() {
+        String userInput = "4,4,4";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals(Triangle.TYPE.EQUILATERAL, triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("bigNumbersIsEquilateral")
+    void testBigNumIsEquilateral() {
+        String userInput = Integer.MAX_VALUE + "," + Integer.MAX_VALUE + "," + Integer.MAX_VALUE;
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals(Triangle.TYPE.EQUILATERAL, triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("TooBigNumber")
+    void testTooBigNumIsNull() {
+        String userInput =  (Long.parseLong(Integer.MAX_VALUE + "") + 1) + "," + Integer.MAX_VALUE + "," + Integer.MAX_VALUE;
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertNull(triangle.getCurrent_type());
+    }
+    @Test
+    @DisplayName("IsoscelesOutput")
+    void testIsIsoscelesOutput() {
+        String userInput = "4,6,4";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals("4, 6, 4, This is a Isosceles triangle", triangle.toString());
+    }
+    @Test
+    @DisplayName("EquilateralOutput")
+    void testIsEquilateralOutput() {
+        String userInput = "6,6,6";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals("6, 6, 6, This is a Equilateral triangle", triangle.toString());
+    }
+    @Test
+    @DisplayName("ScaleneOutput")
+    void testIsScaleneOutput() {
+        String userInput = "5,6,7";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals("5, 6, 7, This is a Scalene triangle", triangle.toString());
+    }
+    @Test
+    @DisplayName("NullOutput")
+    void testIsNullOutput() {
+        String userInput = "5,fgh,7";
+
+        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
+        triangle.getUserInput();
+        assertEquals("0, 0, 0, This is not a triangle", triangle.toString());
+    }
+
+
+    @Test
     @DisplayName("testConstructor3")
     void testConstructorIsNotTriangle() {
         String[] in = new String[]{"2", "3"};
@@ -68,23 +176,6 @@ class TriangleTest {
         assertNull(triangle.getCurrent_type());
     }
     @Test
-    @DisplayName("almostTooBigSide")
-    void testAlmostTooBigSideIsTriangle() {
-        String userInput = "5999, 2999, 2999";
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertNull(triangle.getCurrent_type());
-    }
-    @Test
-    @DisplayName("123IsScalene")
-    void testIsScalene() {
-        String userInput = "2,4,3";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals(Triangle.TYPE.SCALENE, triangle.getCurrent_type());
-    }
-    @Test
     @DisplayName("NotEnoughNumbers")
     void testTooFewNumbersIsNotTriangle() {
         String userInput = "2,2";
@@ -92,78 +183,6 @@ class TriangleTest {
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         triangle.getUserInput();
         assertNull(triangle.getCurrent_type());
-    }
-    @Test
-    @DisplayName("464IsIsosceles")
-    void testIsIsosceles() {
-        String userInput = "4,6,4";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals(Triangle.TYPE.ISOSCELES, triangle.getCurrent_type());
-    }
-    @Test
-    @DisplayName("IsoscelesOutput")
-    void testIsIsoscelesOutput() {
-        String userInput = "4,6,4";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals("4, 6, 4, This is a Isosceles triangle", triangle.toString());
-    }
-    @Test
-    @DisplayName("EquilateralOutput")
-    void testIsEquilateralOutput() {
-        String userInput = "6,6,6";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals("6, 6, 6, This is a Equilateral triangle", triangle.toString());
-    }
-    @Test
-    @DisplayName("ScaleneOutput")
-    void testIsScaleneOutput() {
-        String userInput = "5,6,7";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals("5, 6, 7, This is a Scalene triangle", triangle.toString());
-    }
-    @Test
-    @DisplayName("NullOutput")
-    void testIsNullOutput() {
-        String userInput = "5,fgh,7";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals("0, 0, 0, This is not a triangle", triangle.toString());
-    }
-    @Test
-    @DisplayName("233IsIsosceles")
-    void testIsIsosceles2() {
-        String userInput = "2,3,3";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals(Triangle.TYPE.ISOSCELES, triangle.getCurrent_type());
-    }
-    @Test
-    @DisplayName("778IsIsosceles")
-    void testIsIsosceles3() {
-        String userInput = "7,7,8";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals(Triangle.TYPE.ISOSCELES, triangle.getCurrent_type());
-    }
-    @Test
-    @DisplayName("444IsEquilateral")
-    void testIsEquilateral() {
-        String userInput = "4,4,4";
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals(Triangle.TYPE.EQUILATERAL, triangle.getCurrent_type());
     }
     @Test
     @DisplayName("OneSideNegative")
@@ -193,15 +212,6 @@ class TriangleTest {
         assertNull(triangle.getCurrent_type());
     }
     @Test
-    @DisplayName("bigNumbersIsEquilateral")
-    void testBigNumIsEquilateral() {
-        String userInput = Integer.MAX_VALUE + "," + Integer.MAX_VALUE + "," + Integer.MAX_VALUE;
-
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertEquals(Triangle.TYPE.EQUILATERAL, triangle.getCurrent_type());
-    }
-    @Test
     @DisplayName("ZeroIsNotTriangle")
     void testOneSideZeroIsNotTriangle() {
         String userInput = "0,1,1";
@@ -224,14 +234,6 @@ class TriangleTest {
     void testOneSideZeroIsNotTriangle3() {
         String userInput = "1,1,0";
 
-        System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-        triangle.getUserInput();
-        assertNull(triangle.getCurrent_type());
-    }
-    @Test
-    @DisplayName("TooBigNumber")
-    void testTooBigNumIsNull() {
-        String userInput =  (Long.parseLong(Integer.MAX_VALUE + "") + 1) + "," + Integer.MAX_VALUE + "," + Integer.MAX_VALUE;
         System.setIn(new ByteArrayInputStream(userInput.getBytes()));
         triangle.getUserInput();
         assertNull(triangle.getCurrent_type());
